@@ -26,7 +26,6 @@ class SectionsPagerAdapter extends FragmentPagerAdapter{
 
             case 2:
                 FriendsFragment friendsFragment = new FriendsFragment();
-                System.out.println("dsggfchgydsxgdydy24154");
                 return friendsFragment;
 
             default:

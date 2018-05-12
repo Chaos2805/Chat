@@ -21,4 +21,9 @@
     <string name="profiel_friends_count">Total Friends</string>
     <string name="profile_req">SEND FRIEND REQUEST</string>
     <string name="profile_dec">DECLINE FRIEND REQUEST</string>
+    <string name="para1">
+        The tactile and physical quality of Material is reflected in the design of Material icons.\n
+        Each icon is cut, folded, and lit as paper would be, but represented by simple graphic elements.\n
+        The quality of Material is sturdy, with clean folds and crisp edges.\n
+        Surfaces interact with light through subtle highlights and consistent shadows.</string>
 </resources>

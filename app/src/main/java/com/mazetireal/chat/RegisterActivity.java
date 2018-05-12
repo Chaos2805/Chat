@@ -104,8 +104,10 @@ public class RegisterActivity extends AppCompatActivity {
                                     if(task.isSuccessful()){
                                         mRegProgress.dismiss();
 
-                                        Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
-                                        startActivity(mainIntent);
+//                                        Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
+//                                        startActivity(mainIntent);
+                                        Intent firstIntent = new Intent(RegisterActivity.this, FirstLoginActivity.class);
+                                        startActivity(firstIntent);
                                         finish();
                                     }
                                 }
