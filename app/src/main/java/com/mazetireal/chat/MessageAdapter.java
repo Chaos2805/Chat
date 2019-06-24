@@ -1,6 +1,7 @@
 package com.mazetireal.chat;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -50,14 +53,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         public CircleImageView profileImage;
         public TextView displayName;
         public ImageView messageImage;
+        public TextView timeText;
 
         public MessageViewHolder(View view) {
             super(view);
 
-            messageText = (TextView) view.findViewById(R.id.message_text_layout);
-            profileImage = (CircleImageView) view.findViewById(R.id.message_profile_layout);
-            displayName = (TextView) view.findViewById(R.id.name_text_layout);
-            messageImage = (ImageView) view.findViewById(R.id.message_image_layout);
+            messageText = view.findViewById(R.id.message_text_layout);
+            profileImage = view.findViewById(R.id.message_profile_layout);
+            displayName = view.findViewById(R.id.name_text_layout);
+            messageImage = view.findViewById(R.id.message_image_layout);
+            timeText = view.findViewById(R.id.time_text_layout);
 
         }
     }
@@ -69,6 +74,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         String from_user = c.getFrom();
         String message_type = c.getType();
+        long message_time = c.getTime();
+        Log.d("APPTAG", "Text: " + message_time);
+//        Date myDate = new Date(message_time*1000);
+        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String finalDate = outputFormat.format(message_time);
 
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(from_user);
@@ -92,6 +102,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
             }
         });
+
+        viewHolder.timeText.setText(finalDate);
 
         if(message_type.equals("text")) {
 
@@ -120,3 +132,36 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
 
 }
+
+
+//    // Different types of rows
+//    private static final int TYPE_ITEM_LEFT = 0;
+//    private static final int TYPE_ITEM_RIGHT = 1;
+//    private static final int TYPE_ITEM_DATE_CONTAINER = 2;
+//
+//public class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+//    class ViewHolder0 extends RecyclerView.ViewHolder {
+//        // Viewholder for row type 0
+//    }
+//
+//    class ViewHolder1 extends RecyclerView.ViewHolder {
+//        // Viewholder for row type 1
+//    }
+//
+//    class ViewHolder2 extends RecyclerView.ViewHolder {
+//        // Viewholder for row type 2
+//    }
+//
+//    @Override
+//    public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, int position) {
+//        if (viewHolder.getItemViewType() == TYPE_ITEM_LEFT) {
+//            // Code to populate type 0 view here
+//
+//        } else if (viewHolder.getItemViewType() == TYPE_ITEM_RIGHT) {
+//            // Code to populate type 1 view here
+//
+//        } else if (viewHolder.getItemViewType() == TYPE_ITEM_DATE_CONTAINER) {
+//            // Code to populate type 2 view here
+//
+//        }
+//    }
